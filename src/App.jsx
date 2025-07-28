@@ -6,11 +6,12 @@ import AboutUs from './pages/AboutUs'
 import DefaultLayout from './layout/DefaultLayout'
 import SingleProduct from './pages/SingleProduct'
 import { GlobalProvider } from './Contexts/GlobalContext'
+import NotFound from './pages/NotFound'
 
 
 
 function App() {
-  
+
 
   return (
     <>
@@ -25,8 +26,9 @@ function App() {
               <Route path='/product/:id' Component={SingleProduct}></Route>
               <Route path='/products' Component={ProductsPage}></Route>
 
-            </Route>
 
+            </Route>
+            <Route path='*' Component={NotFound}></Route>
 
 
 

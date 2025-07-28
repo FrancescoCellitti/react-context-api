@@ -5,28 +5,47 @@ const GlobalContext = createContext()
 function GlobalProvider({ children }) {
 
     const [data, setData] = useState([])
+    const [alert, setAlert] = useState({
+        type: "info",
+        message: ''
+    })
     useEffect(() => {
         fetch('https://fakestoreapi.com/products')
-            .then(response => response.json())
-            .then(data =>
-                setData(data)
-            )
-            .catch(error => console.error('errore nel fetch', error))
-
-    }, [])
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Errore HTTP: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => setData(data))
+            .catch(error => {
+                const alertData = {
+                    type: 'error',
+                    message: error.message
+                };
+                setAlert(alertData)
+               console.log(alertData) 
+            })
+            
+    }, []);
 
     return (
         <GlobalContext.Provider value={{
             data,
-            setData
+            setData, 
+            alert, 
+            setAlert
         }}>
             {children}
         </GlobalContext.Provider>
+
+
     )
+
 }
 
-function useGlobalContext(){
+function useGlobalContext() {
     return useContext(GlobalContext)
 }
 
-export {GlobalProvider, useGlobalContext}
+export { GlobalProvider, useGlobalContext }
