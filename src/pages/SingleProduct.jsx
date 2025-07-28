@@ -20,7 +20,7 @@ export default function SingleProduct() {
     return (
         <>
             <div className="container">
-                <div className="card border-0 col-6 mx-auto">
+                <div className="card border-0 col-6 mx-auto mt-5">
                     <img src={product.image} alt="" style={{
                         height: '300px',
                         objectFit: 'contain',
