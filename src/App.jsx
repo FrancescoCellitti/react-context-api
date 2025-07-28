@@ -1,35 +1,46 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import HomePage from './pages/Homepage'
+import ProductsPage from './pages/ProductsPage'
+import AboutUs from './pages/AboutUs'
+import DefaultLayout from './layout/DefaultLayout'
+import SingleProduct from './pages/SingleProduct'
+import { GlobalProvider } from './Contexts/GlobalContext'
+
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  
 
   return (
     <>
-     <BrowserRouter>
-        <Routes>
 
-          <Route Component={DefaultLayout}>
-            <Route index Component={HomePage}></Route>
-            <Route path='/Abouth_Us' Component={AboutUs}></Route>
-            <Route path='/product/:id' Component={SingleProduct}></Route>
-            <Route path='/products' Component={ProductsPage}></Route>
+      <GlobalProvider>
+        <BrowserRouter>
+          <Routes>
 
-          </Route>
+            <Route Component={DefaultLayout}>
+              <Route index Component={HomePage}></Route>
+              <Route path='/Abouth_Us' Component={AboutUs}></Route>
+              <Route path='/product/:id' Component={SingleProduct}></Route>
+              <Route path='/products' Component={ProductsPage}></Route>
 
-
-
-
-
-        </Routes>
+            </Route>
 
 
 
 
 
-      </BrowserRouter>
+          </Routes>
+
+
+
+
+
+        </BrowserRouter>
+
+      </GlobalProvider>
+
     </>
   )
 }
